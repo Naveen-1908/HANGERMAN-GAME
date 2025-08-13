@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hangman Game</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+        background: linear-gradient(270deg, #1a2a6c, #b21f1f, #fdbb2d);
+        background-size: 600% 600%;
+        animation: gradientBG 12s ease infinite;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    #word-display {
+        font-size: 2rem;
+        letter-spacing: 10px;
+        margin: 20px 0;
+    }
+
+    /* Keyboard styling */
+    #keyboard {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+        max-width: 500px; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #keyboard button {
+        width: 50px;
+        height: 50px;
+        background-color: rgb(255, 0, 76);
+        border: none;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #keyboard button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px yellow;
+    }
+
+    #keyboard button:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
+
+    #game-over {
+        margin-top: 20px;
+        font-size: 2rem;
+        font-weight: bold;
+        animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: scale(0.5); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Hangman Game</h1>
+    <p id="word-display"></p>
+    <div id="keyboard"></div>
+    <p id="game-over"></p>
+    <button onclick="resetGame()" style="padding:10px 20px; font-size:16px;">Restart Game</button>
+</div>
+
+<script>
+    const words = ["JAVASCRIPT", "PYTHON", "HANGMAN", "CODING", "PROGRAM"];
+    let chosenWord, displayWord, wrongGuesses;
+
+    function startGame() {
+        chosenWord = words[Math.floor(Math.random() * words.length)];
+        displayWord = "_".repeat(chosenWord.length);
+        wrongGuesses = 0;
+        document.getElementById("word-display").textContent = displayWord.split("").join(" ");
+        document.getElementById("game-over").textContent = "";
+        createKeyboard();
+    }
+
+    function createKeyboard() {
+        const keyboard = document.getElementById("keyboard");
+        keyboard.innerHTML = "";
+        for (let i = 65; i <= 90; i++) {
+            const letter = String.fromCharCode(i);
+            const button = document.createElement("button");
+            button.textContent = letter;
+            button.onclick = () => guessLetter(letter, button);
+            keyboard.appendChild(button);
+        }
+    }
+
+    function guessLetter(letter, button) {
+        button.disabled = true;
+        let newDisplay = "";
+        let correct = false;
+
+        for (let i = 0; i < chosenWord.length; i++) {
+            if (chosenWord[i] === letter) {
+                newDisplay += letter;
+                correct = true;
+            } else {
+                newDisplay += displayWord[i];
+            }
+        }
+
+        displayWord = newDisplay;
+        document.getElementById("word-display").textContent = displayWord.split("").join(" ");
+
+        if (!correct) {
+            wrongGuesses++;
+            if (wrongGuesses >= 6) {
+                document.getElementById("game-over").textContent = "💀 Game Over! The word was: " + chosenWord;
+                disableAllButtons();
+            }
+        } else if (!displayWord.includes("_")) {
+            document.getElementById("game-over").textContent = "🎉 You Win!";
+            disableAllButtons();
+        }
+    }
+
+    function disableAllButtons() {
+        document.querySelectorAll("#keyboard button").forEach(btn => btn.disabled = true);
+    }
+
+    function resetGame() {
+        startGame();
+    }
+
+    startGame();
+</script>
+<div class="keyboard-container">
+    <div class="keyboard" id="keyboard">
+        <!-- Buttons will be generated here -->
+    </div>
+</div>
+
+
+
+</body>
+</html>

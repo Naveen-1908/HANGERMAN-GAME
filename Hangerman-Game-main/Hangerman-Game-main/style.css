@@ -1,0 +1,144 @@
+/* Make all text bold */
+body, h1, h2, h3, h4, h5, h6, p, span, div, button, #word, #hint, #incorrect, #gameOver {
+    font-weight: bold !important;
+}
+
+/* Body and animated gradient */
+body {
+    margin: 0;
+    height: 90vh;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(270deg, #ff6ec4, #7873f5, #42e695, #ff9a9e);
+    background-size: 800% 800%;
+    animation: gradientShift 15s ease inite;
+    text-align: center;
+}
+#title {
+    font-size: 68px;         /* Large font size */
+    font-weight: 800;        /* Extra bold */
+    text-align: center;      /* Centered on screen */
+    color: #ffffff;             /* White color for contrast */
+    text-shadow: 2px 2px 8px #000; /* Adds shadow for depth */
+    margin-bottom: 10px;
+    font-family: 'Arial Black', Arial, sans-serif; /* Extra bold font */
+}
+
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes winAnimation {
+    0% { background-color: #4CAF50; }
+    50% { background-color: #76FF7A; }
+    100% { background-color: #4CAF50; }
+}
+
+@keyframes loseAnimation {
+    0% { background-color: #FF4C4C; }
+    50% { background-color: #FF9999; }
+    100% { background-color: #FF4C4C; }
+}
+
+@keyframes guessAnimation {
+    0% { background-color: #FFD700; }
+    50% { background-color: #FFFACD; }
+    100% { background-color: #FFD700; }
+}
+
+#keyboard {
+    display: flex;
+    flex-wrap: wrap;           /* Allow letters to wrap to next line */
+    justify-content: center;   /* Center all buttons horizontally */
+    max-width: 500px;          /* Optional: limit total width like mobile */
+    margin: 20px auto;         /* Center container with top margin */
+    gap: 23px;                  /* Space between buttons */
+}
+
+#keyboard button {
+    flex: 0 0 40px;
+    padding: 10px 15px;           /* Each button has fixed width like mobile key */
+    height: 45px;
+    color: #fff;                /* Fixed height */
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background: linear-gradient(45deg, #8dff6e, #f573df);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#keyboard button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #fff;
+}
+
+
+
+
+/* Word display */
+#word {
+    font-size: 40px;
+    letter-spacing: 10px;
+    margin-top: 20px;
+}
+
+/* Hint */
+#hint {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+/* Incorrect guesses */
+#incorrect {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+/* Game Over message */
+#gameOver {
+    margin-top: 20px;
+    font-size: 30px;
+    color: rgb(16, 16, 30);
+}
+
+#playAgain {
+    margin-top: 15px;
+    padding: 12px 25px;
+    font-size: 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(45deg, #FF6EC4, #7873F5, #42E695, #FF9A9E);
+    background-size: 400% 400%;
+    animation: playAgainGradient 3s ease infinite, pulse 2s infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#playAgain:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px white;
+}
+
+/* Pulsing effect */
+@keyframes pulse {
+    0% { box-shadow: 0 0 5px #fff; transform: scale(1); }
+    50% { box-shadow: 0 0 20px #fff; transform: scale(1.08); }
+    100% { box-shadow: 0 0 5px #fff; transform: scale(1); }
+}
+
+/* Gradient animation */
+@keyframes playAgainGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}

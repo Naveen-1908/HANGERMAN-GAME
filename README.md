@@ -3,7 +3,7 @@
    I’m excited to share my newest web project – **Ultimate Hangman**  
 💥 A fully interactive word-guessing game built using **Vanilla JavaScript**, **HTML**, and **CSS**!
 
-🔗 [Live Demo](https://ultimate-hangman.netlify.app/)
+🔗 [Live Demo](https://hangerman-game.netlify.app)
 
 
 ---
